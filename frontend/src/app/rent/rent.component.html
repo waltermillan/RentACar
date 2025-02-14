@@ -1,0 +1,50 @@
+<div class="container">
+    <h2>Formulario de Alquiler</h2>
+  
+    <!-- Combo de Clientes -->
+    <div class="form-group">
+      <label for="clientes">Seleccionar Cliente:</label>
+      <select [(ngModel)]="selectedCliente" id="clientes" class="form-control">
+        <option *ngFor="let customer of customers" [value]="customer.id">{{ customer.name }}</option>
+      </select>
+    </div>
+  
+    <!-- Combo de Automóviles -->
+    <div class="form-group">
+      <label for="automoviles">Seleccionar Automóvil:</label>
+      <select [(ngModel)]="selectedAutomovil" (change)="onCarChange()" id="automoviles" class="form-control">
+        <option *ngFor="let cp of carsPrice" [value]="cp.car.id">{{ cp.car.model }}</option>
+
+      </select>
+    </div>
+  
+    <!-- Combo de Tipo de Pago -->
+    <div class="form-group">
+      <label for="tiposPago">Seleccionar Tipo de Pago:</label>
+      <select [(ngModel)]="selectedPago" id="tiposPago" class="form-control">
+        <option *ngFor="let payType of paysType" [value]="payType.id">{{ payType.name }}</option>
+      </select>
+    </div>
+
+    <div class="contador">
+      <h2>Contador de días de alquiler</h2>
+      <p>{{ rentDays }} días</p>
+      
+      <button (click)="addDay()">Sumar un día</button>
+      <button (click)="subDay()">Restar un día</button>
+    </div>
+  
+    <!-- Combo de Precios -->
+    <!-- <div class="form-group">
+      <label for="precios">Seleccionar Precio:</label>
+      <select [(ngModel)]="selectedPrecio" id="precios" class="form-control">
+        <option *ngFor="let precio of precios" [value]="precio">{{ precio }}</option>
+      </select>
+    </div> -->
+  
+    <!-- Botón de Alquilar -->
+    <div class="form-group">
+      <button (click)="rentCar()" class="btn btn-primary btn-block">Alquilar</button>
+    </div>
+  </div>
+  

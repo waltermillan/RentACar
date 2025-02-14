@@ -1,0 +1,28 @@
+<div>
+  <!-- Rótulo con imagen en la parte superior -->
+  <header style="background-color: #d6e9e9; color: black; padding: 20px; text-align: center;">
+    <!-- Corregir el uso de comillas aquí -->
+    <img src="assets/images/car-rental-icon.png" alt="Logo" style="max-width: 100px; vertical-align: middle; margin-right: 20px;">
+    <span style="font-size: 24px; vertical-align: middle;">Gestión de alquileres de automóviles</span>
+  </header>
+
+  <!-- Contenedor principal con el menú lateral y contenido -->
+  <div style="display: flex; height: calc(100vh - 80px);">
+    <!-- Menú lateral -->
+    <div style="width: 200px; background-color: #f4f4f4; padding: 10px;">
+      <ul>
+        <li><a routerLink="/automoviles" routerLinkActive="active">Automóviles</a></li>
+        <li><a routerLink="/clientes" routerLinkActive="active">Clientes</a></li>
+        <li><a routerLink="/alquileres" routerLinkActive="active">Alquileres</a></li>
+        <li><a routerLink="/documentos" routerLinkActive="active">Documentos</a></li>
+        <li><a routerLink="/precios" routerLinkActive="active">Precios</a></li>
+        <li><a routerLink="/TipoPago" routerLinkActive="active">Tipos De Pagos</a></li>
+      </ul>
+    </div>
+
+    <!-- Contenido principal -->
+    <div style="flex-grow: 1; padding: 20px;">
+      <router-outlet></router-outlet>  <!-- Aquí se cargarán los componentes -->
+    </div>
+  </div>
+</div>

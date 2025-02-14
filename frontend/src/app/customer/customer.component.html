@@ -1,0 +1,69 @@
+<div class="container mt-3">
+  <!-- Formulario para dar de alta un nuevo cliente -->
+  <p style="font-weight: bold">Agregar Nuevo Cliente</p>
+  <form (ngSubmit)="onSubmit()" #customerForm="ngForm">
+    <div class="form-group">
+      <label for="name">Nombre:</label>
+      <input type="text" id="name" class="form-control" [(ngModel)]="newCustomer.name" name="name" required>
+    </div>
+    <div class="form-group">
+      <label for="document">Documento:</label>
+      <input type="text" id="document" class="form-control" [(ngModel)]="newCustomer.document" name="document" required>
+    </div>
+    <div class="form-group">
+      <label for="documentType">Tipo Documento:</label>
+     <!--<input type="number" id="documentType" class="form-control" [(ngModel)]="newCustomer.documentType" name="documentType" required> -->
+     <div class="form-group">
+      <select id="documentType" [(ngModel)]="newCustomer.documentType" name="documentType" class="form-control">
+        <option value="1">DNI</option>
+        <option value="2">NIE</option>
+        <option value="3">TIE</option>
+        <option value="4">DNIe</option>
+        <option value="5">DNI 3.0</option>
+      </select>
+    </div>
+    </div>
+    <div class="form-group">
+      <label for="birthDate">Fecha de Nacimiento:</label>
+      <!--<input type="date" id="birthDate" class="form-control" [(ngModel)]="newCustomer.birthDate" name="birthDate" required>-->
+      <input type="date" [(ngModel)]="newCustomer.birthDate" name="birthDate" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!customerForm.valid">Agregar Cliente</button>
+  </form>
+
+  <hr>
+
+  <!-- Tabla con los clientes existentes -->
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Documento</th>
+        <th>Tipo documento</th>
+        <th>Fecha Nacimiento</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customers">
+        <td>{{ customer.id }}</td>
+        <td style="text-align: left;">{{ customer.name }}</td>
+        <td style="text-align: left;">{{ customer.document }}</td>
+        <td>{{ getDocumentTypeName(customer.documentType) }}</td>
+        <td>{{ customer.birthDate | date:'dd/MM/yyyy' }}</td>
+        <td>
+            <button 
+            #BtnDeleteCustomer
+            (click)="deleteCustomer(customer.id)" 
+            class="image-button">
+            <img 
+              src="assets/images/delete.svg" 
+              alt="Eliminar cliente" 
+              title="Eliminar cliente" />
+          </button>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

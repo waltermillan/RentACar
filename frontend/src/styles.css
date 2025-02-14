@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+/* Estilo para el menú */
+ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    margin: 10px 0;
+  }
+  
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  a.active {
+    font-weight: bold;
+  }
+
+  /* Estilo para el encabezado */
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Estilo para la imagen del rótulo */
+  header img {
+    max-width: 100px;
+    vertical-align: middle;
+    margin-right: 20px;
+  }
+  
+  /* Estilo para el texto del rótulo */
+  header span {
+    font-size: 24px;
+    vertical-align: middle;
+  }
+  
+  .table th, .table td {
+    text-align: center;
+  }
+  .table {
+    width: 80%;
+    margin: 20px auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  

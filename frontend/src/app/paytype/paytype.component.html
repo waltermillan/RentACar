@@ -1,0 +1,14 @@
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Tipo de Pago</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let payType of paystype">
+        <td>{{ payType.id }}</td>
+        <td>{{ payType.name }}</td>
+      </tr>
+    </tbody>
+  </table>

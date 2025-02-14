@@ -1,0 +1,19 @@
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Valor</th>
+        <th>Descuento</th>
+        <th>Acepta Descuento</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let price of prices">
+        <td>{{ price.id }}</td>
+        <td>{{ price.value }} €</td>
+        <td>{{ price.discount }} €</td>
+        <td #aceptaSi *ngIf="price.acceptDiscount" else #aceptaNo>SI</td>
+        <td #aceptaNo *ngIf="!price.acceptDiscount" else #aceptaSi>NO</td>
+      </tr>
+    </tbody>
+  </table>
