@@ -7,8 +7,12 @@ using System.Text;
 
 namespace Infrastructure.Data
 {
-    public partial class Context(DbContextOptions<Context> options) : DbContext(options)
+    public partial class Context : DbContext
     {
+        public Context() { }
+
+        public Context(DbContextOptions<Context> options) : base(options) { }
+
         public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<PayType> PaysType { get; set; }
@@ -18,9 +22,18 @@ namespace Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Car>().ToTable("Car");
-            modelBuilder.Entity<Core.Entities.Customer>()
-                .HasKey(c => c.Id);  // Define Id as the primary key
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Rent>()
+                .HasOne(r => r.Customer)
+                .WithMany()
+                .HasForeignKey(r => r.IdCustomer);
+
+            modelBuilder.Entity<Rent>()
+                .HasOne(r => r.Car)
+                .WithMany()
+                .HasForeignKey(r => r.IdCar);
         }
     }
+
 }

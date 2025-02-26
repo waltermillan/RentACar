@@ -8,14 +8,28 @@ import { Rent } from '../models/rent.model';
 })
 export class RentService {
 
-  private urlAddRent = 'http://localhost:5184/api/Rent/Add';
+  private apiUrl = 'http://localhost:5184/api/rents/';
 
   constructor(private http: HttpClient) { }
 
   addRent(rent: Rent): Observable<Rent> {
-    console.log('url: ' + this.urlAddRent);
-    console.log('rent: ' + JSON.stringify(rent, null, 2));
+    
+    return this.http.post<any>(this.apiUrl, rent);
+  }
 
-    return this.http.post<Rent>(this.urlAddRent, rent);
+  getAllRents() {
+    return this.http.get<any>(this.apiUrl);
+  }
+
+
+  deleteRent(id: number): Observable<any> {
+    const url = `${this.apiUrl}${id}`;
+    return this.http.delete<any>(url); 
+  }
+
+  getAllRentsWithFullData(customerId: number, carId: number, rentId: number, payTypeId: number, priceId: number) {
+
+    const url = `http://localhost:5184/api/customers/viees?customerId=${customerId}&carId=${carId}&rentId=${rentId}&payTypeId=${payTypeId}&priceId=${priceId}`;
+    return this.http.get<any>(this.apiUrl);
   }
 }

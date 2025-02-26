@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using API.DTOs;
+using AutoMapper;
 using Core.Constants;
 using Core.Entities;
 using Core.Interfases;
@@ -6,7 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
 namespace API.Controllers;
-
+[ApiController]
+[Route("api/cars")] // Usamos el plural en la ruta para seguir la convención RESTful
 public class CarController : BaseApiController
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -18,8 +20,7 @@ public class CarController : BaseApiController
         _mapper = mapper;
     }
 
-    // Método existente: obtener todas las ciudades
-    [HttpGet("GetAll")]
+    [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<Car>>> Get()
@@ -28,10 +29,10 @@ public class CarController : BaseApiController
         return _mapper.Map<List<Car>>(cars);
     }
 
-    [HttpGet("GetAllCarsWithPrice")]
+    [HttpGet("price")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<IEnumerable<CarWithPrice>>> GetAllCarsWithPrice()
+    public async Task<ActionResult<IEnumerable<CarWithPrice>>> GetAllCarsWithPrice()   // Precio de cada coche
     {
         var cars = await _unitOfWork.Cars.GetAllAsync();
 
@@ -51,9 +52,7 @@ public class CarController : BaseApiController
         return availableCarsWithPrices;  // No es necesario usar AutoMapper aquí
     }
 
-
-    // Método existente: obtener un automovil por su ID
-    [HttpGet("Get")]
+    [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -66,8 +65,7 @@ public class CarController : BaseApiController
         return _mapper.Map<Car>(car);
     }
 
-    // Método existente: agregar un automovil
-    [HttpPost("Add")]
+    [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<Car>> Post(Car oCar)
@@ -95,8 +93,7 @@ public class CarController : BaseApiController
         }
     }
 
-    // Método existente: actualizar una ciudad
-    [HttpPut("Update")]
+    [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -123,8 +120,7 @@ public class CarController : BaseApiController
         }
     }
 
-    // Método existente: eliminar una ciudad
-    [HttpDelete("Delete/{id}")]
+    [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
@@ -145,6 +141,45 @@ public class CarController : BaseApiController
         catch (Exception exception)
         {
             msg = Constants.MSG_CAR_DELETED_ERROR;
+            Log.Logger.Error(msg, exception);
+            return BadRequest(msg);
+        }
+    }
+
+    [HttpPatch("{id}/rented")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> UpdateRented(int id, [FromBody] UpdateCarRentedDTO rentedDTO)
+    {
+        var msg = string.Empty;
+
+        try
+        {
+            if (rentedDTO == null)
+            {
+                return BadRequest("Datos Invalidos.");
+            }
+
+            var car = await _unitOfWork.Cars.GetByIdAsync(id);
+            if (car == null)
+            {
+                return NotFound(); 
+            }
+
+            car.Rented = rentedDTO.Rented;
+
+            _unitOfWork.Cars.Update(car);
+            await _unitOfWork.SaveAsync();
+
+            msg = string.Format("Se ha actualizado el estado «Alquilado» del coche {0}..", car.Model);
+            Log.Information(msg);
+
+            return Ok(car);  // Retorna el objeto actualizado
+        }
+        catch (Exception exception)
+        {
+            msg = "Error al actualizar el estado 'Alquilado' del coche.";
             Log.Logger.Error(msg, exception);
             return BadRequest(msg);
         }

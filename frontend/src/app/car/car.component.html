@@ -1,35 +1,21 @@
-<table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Marca</th>
-        <th>Modelo</th>
-        <th>Año</th>
-        <th>Alquilado</th>
-        <th>precio alquiler</th>
-      </tr>
-    </thead>
-    <!-- <tbody>
-      <tr *ngFor="let car of cars">
-        <td>{{ car.id }}</td>
-        <td style="text-align: left;">{{ car.brand }}</td>
-        <td style="text-align: left;">{{ car.model }}</td>
-        <td>{{ car.year }}</td>
-        <td #si *ngIf="car.rented == 1" else #no>SI</td>
-        <td #no *ngIf="car.rented == 0" else #si>NO</td>
-        <td>{{ car.idPrice }}</td>
-      </tr>
-    </tbody> -->
-    <tbody>
-      <tr *ngFor="let cp of carprice">
-        <td>{{ cp.car.id }}</td>
-        <td style="text-align: left;">{{ cp.car.brand }}</td>
-        <td style="text-align: left;">{{ cp.car.model }}</td>
-        <td>{{ cp.car.year }}</td>
-        <td #si *ngIf="cp.car.rented == 1" else #no>SI</td>
-        <td #no *ngIf="cp.car.rented == 0" else #si>NO</td>
-        <td>{{ cp.price.value }} €</td>
-      </tr>
-    </tbody>
-  </table>
- 
+<div class="container mt-3">
+  <!-- Formulario para dar de alta un nuevo automovil -->
+  <p style="font-weight: bold">Agregar Nuevo Automovil</p>
+  <form (ngSubmit)="onSubmit()" #customerForm="ngForm">
+    <div class="form-group">
+      <label for="name">Modelo:</label>
+      <input type="text" id="name" class="form-control" [(ngModel)]="newCar.model" name="model" required>
+    </div>
+    <div class="form-group">
+      <label for="document">Marca:</label>
+      <input type="text" id="document" class="form-control" [(ngModel)]="newCar.brand" name="brand" required>
+    </div>
+
+    <div class="form-group">
+      <label for="document">Año:</label>
+      <input type="text" id="year" class="form-control" [(ngModel)]="newCar.year" name="year" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!customerForm.valid">Agregar Automovil</button>
+  </form>
+</div>

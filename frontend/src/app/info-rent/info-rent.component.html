@@ -1,0 +1,40 @@
+<div>
+    <!-- Tabla con los clientes existentes -->
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>ID Customer</th>
+          <th>ID Car</th>
+          <th>Day</th>
+          <th>Remaining Day</th>
+          <th>Pay Type ID</th>
+          <th>Price ID</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rent of rents">
+          <td>{{ rent.id }}</td>
+          <td>{{ rent.idCustomer }}</td>
+          <td style="text-align: left;">{{ rent.idCar }}</td>
+          <td style="text-align: left;">{{ rent.day  | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ rent.dayRemaining | date: 'dd/MM/yyyy'}}</td>
+          <td>{{ rent.payTypeId }}</td>
+          <td>{{ rent.priceId }}</td>
+          <td>
+              <button 
+              #BtnDeleteCustomer
+              (click)="deleteRent(rent.id, rent.idCar)" 
+              class="image-button">
+              <img 
+                src="assets/images/delete.svg" 
+                alt="Eliminar cliente" 
+                title="Eliminar cliente" />
+            </button>
+  
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

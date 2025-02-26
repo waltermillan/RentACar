@@ -10,7 +10,7 @@ export class DocumentService {
 
   constructor(private http: HttpClient) { }
   
-    private apiUrl = 'http://localhost:5184/api/Document/GetAll';
+    private apiUrl = 'http://localhost:5184/api/documents/';
   
   
     getAllDocuments(): Observable<Document[]> {

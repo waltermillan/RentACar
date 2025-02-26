@@ -14,7 +14,7 @@ export class PriceService {
 
     prices:Price [] = [];
   
-    private apiUrl = 'http://localhost:5184/api/Price/GetAll';
+    private apiUrl = 'http://localhost:5184/api/prices/';
   
   
     getAllPrices(): Observable<Price[]> {

@@ -8,7 +8,8 @@ using Serilog;
 using System;
 
 namespace API.Controllers;
-
+[ApiController]
+[Route("api/documents")] // Usamos el plural en la ruta para seguir la convención RESTful
 public class DocumentController : BaseApiController
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -20,8 +21,7 @@ public class DocumentController : BaseApiController
         _mapper = mapper;
     }
 
-    // Método existente: obtener todas los documentos
-    [HttpGet("GetAll")]
+    [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<Document>>> Get()
@@ -30,8 +30,7 @@ public class DocumentController : BaseApiController
         return _mapper.Map<List<Document>>(documents);
     }
 
-    // Método existente: obtener un document por su ID
-    [HttpGet("Get")]
+    [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -44,8 +43,7 @@ public class DocumentController : BaseApiController
         return _mapper.Map<Document>(document);
     }
 
-    // Método existente: agregar un document
-    [HttpPost("Add")]
+    [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<Document>> Post(Document oDocument)
@@ -75,8 +73,7 @@ public class DocumentController : BaseApiController
         }
     }
 
-    // Método existente: actualizar un documento
-    [HttpPut("Update")]
+    [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -105,8 +102,7 @@ public class DocumentController : BaseApiController
         }
     }
 
-    // Método existente: eliminar una ciudad
-    [HttpDelete("Delete/{id}")]
+    [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)

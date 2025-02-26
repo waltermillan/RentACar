@@ -8,22 +8,21 @@ import { Customer } from '../models/customer.model';
 })
 export class CustomerService {
 
-  private apiUrlGetAllCustomers = 'http://localhost:5184/api/Customer/GetAll';
-  private addCustomerUrl = 'http://localhost:5184/api/Customer/Add';
+  private apiUrl = 'http://localhost:5184/api/customers/';
 
   constructor(private http: HttpClient) { }
 
   getAllCustomers(): Observable<Customer[]> {
-    return this.http.get<Customer[]>(this.apiUrlGetAllCustomers);
+    return this.http.get<Customer[]>(this.apiUrl);
   }
 
   addCustomer(customer: Customer): Observable<Customer> {
-    return this.http.post<Customer>(this.addCustomerUrl, customer);
+    return this.http.post<Customer>(this.apiUrl, customer);
   }
 
 
   deleteCustomer(id: number): Observable<any> {
-    const url = `http://localhost:5184/api/Customer/Delete/${id}`;  // Construir la URL con el 'id' aquí
+    const url = `${this.apiUrl}{id}`;  // Construir la URL con el 'id' aquí
     return this.http.delete<any>(url);  // Llamar al servicio HTTP con la URL correcta
   }
   

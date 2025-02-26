@@ -1,9 +1,10 @@
 export interface Rent {
+    id:number;
     idCustomer: number;
     idCar: number;
-    day: Date;
-    dayRemaining:Date;
-    payTypeId: Number;
-    priceId: Number;
+    day: string;// Date;
+    dayRemaining: string; //Date;
+    payTypeId: number;
+    priceId: number;
   }
   

@@ -12,8 +12,7 @@ import { CarPrice } from '../models/carPrice.model';
 
 import { Rent } from '../models/rent.model';
 import { RentService } from '../services/rent.service';
-
-
+import { CarService } from '../services/car.service';
 
 @Component({
   selector: 'app-rent',
@@ -45,6 +44,7 @@ export class RentComponent {
               private carPriceService:CarPriceService,
               private paytypeService:PaytypeService,
               private rentService: RentService,
+              private carService:CarService,
               private datePipe: DatePipe) {
         
   }
@@ -66,12 +66,26 @@ export class RentComponent {
 
     this.rent.idCustomer = parseInt(this.selectedCliente);
     this.rent.idCar = parseInt(this.selectedAutomovil);
-    this.rent.day = this.getFormattedDate();
-    this.rent.dayRemaining = this.getReturnDay(this.rentDays);
+    //this.rent.day = this.getFormattedDate().toString();
     this.rent.payTypeId = parseInt(this.selectedPago);
     this.rent.priceId = parseInt(this.selectedPriceId)
 
-    this.rentService.addRent(this.rent);
+    this.rent.day = this.datePipe.transform(new Date(), 'yyyy-MM-dd')!;
+    this.rent.dayRemaining = this.datePipe.transform(this.getReturnDay(this.rentDays), 'yyyy-MM-dd')!;
+
+
+    // Asegúrate de que la respuesta sea manejada correctamente
+    this.rentService.addRent(this.rent).subscribe({
+    next: (response) => {
+      console.log('Alquiler realizado con éxito', response);
+      this.carUpdateRented(this.rent.idCar); // Cambio el estado del automovil
+    },
+    error: (error) => {
+      console.error('Error al realizar el alquiler', error);
+    }
+  });
+
+    //this.rentService.addRent(this.rent);
   }
 
   getReturnDay(rentDays: number): Date {
@@ -125,6 +139,17 @@ export class RentComponent {
         console.error('Error al obtener los tipos de pagos', error);
       }
     });
+  }
+
+  carUpdateRented(id:number){
+    this.carService.CarUpdateRented(id, 1).subscribe({
+      next: (data) => {
+        console.log('Estado de automovil actualizado con éxito:', data);
+      },
+      error: (error) => {
+        console.error('Error al actualizar el estado del coche:', error);
+      }
+    })
   }
 
   // Incrementa un día

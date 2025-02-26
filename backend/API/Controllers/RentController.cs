@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using API.DTOs;
+using AutoMapper;
 using Core.Constants;
 using Core.Entities;
 using Core.Interfases;
@@ -7,7 +8,8 @@ using Serilog;
 using System;
 
 namespace API.Controllers;
-
+[ApiController]
+[Route("api/rents")] // Usamos el plural en la ruta para seguir la convención RESTful
 public class RentController : BaseApiController
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -19,8 +21,7 @@ public class RentController : BaseApiController
         _mapper = mapper;
     }
 
-    // Método existente: obtener todas las ciudades
-    [HttpGet("GetAll")]
+    [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<Rent>>> Get()
@@ -29,8 +30,7 @@ public class RentController : BaseApiController
         return _mapper.Map<List<Rent>>(rents);
     }
 
-    // Método existente: obtener una ciudad por su ID
-    [HttpGet("Get")]
+    [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -43,8 +43,7 @@ public class RentController : BaseApiController
         return _mapper.Map<Rent>(rent);
     }
 
-    // Método existente: agregar una ciudad
-    [HttpPost("Add")]
+    [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<Rent>> Post(Rent oRent)
@@ -75,8 +74,7 @@ public class RentController : BaseApiController
         }
     }
 
-    // Método existente: actualizar una ciudad
-    [HttpPut("Update")]
+    [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -106,8 +104,7 @@ public class RentController : BaseApiController
         }
     }
 
-    // Método existente: eliminar una ciudad
-    [HttpDelete("Delete/{id}")]
+    [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)

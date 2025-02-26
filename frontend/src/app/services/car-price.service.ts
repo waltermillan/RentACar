@@ -11,7 +11,7 @@ export class CarPriceService {
   constructor(private http: HttpClient) { }
 
   GetAllCarsWithPrice(): Observable<CarPrice[]> {
-    const url = `http://localhost:5184/api/Car/GetAllCarsWithPrice`;
+    const url = `http://localhost:5184/api/cars/price`;
     return this.http.get<CarPrice[]>(url);
   }
 }

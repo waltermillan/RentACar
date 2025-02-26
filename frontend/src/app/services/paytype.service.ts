@@ -10,7 +10,7 @@ export class PaytypeService {
 
   constructor(private http: HttpClient) { }
 
-    private apiUrl = 'http://localhost:5184/api/PayType/GetAll';
+    private apiUrl = 'http://localhost:5184/api/payTypes/';
   
     getAllPaysType(): Observable<PayType[]> {
       return this.http.get<PayType[]>(this.apiUrl);

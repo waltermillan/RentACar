@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, numberAttribute } from '@angular/core';
 import { Car } from '../models/car.model';
 import { CarService } from '../services/car.service';
-import { CarPriceService } from '../services/car-price.service';
-import { CarPrice } from '../models/carPrice.model';
 
 @Component({
   selector: 'app-car',
@@ -11,38 +9,41 @@ import { CarPrice } from '../models/carPrice.model';
 })
 export class CarComponent {
 
-  cars: Car[] = []; // Propiedad para almacenar los coches
-  carprice:CarPrice[] = [];
+  cars: Car[] = []; // Propiedad para almacenar los automoviles
 
-  constructor(private carService: CarService, 
-              private carPriceService: CarPriceService
-  ) { }
+  newCar: Car = {   // Nuevo Automovil vacío
+    id: 0,
+    model: '',
+    brand: '',
+    year: 0,
+    rented: 0,
+    idPrice: 0
+  };
+
+  constructor(private carService: CarService) { }
 
   ngOnInit(): void {
-    this.getAllCars();
-    this.getAllCarByIdWithPrice();
+
   }
 
-  getAllCarByIdWithPrice():any{
-    this.carPriceService.GetAllCarsWithPrice().subscribe({
-      next: (data: CarPrice[]) => {
-        this.carprice = data; // Almacenar los coches obtenidos en la propiedad cars
+  onSubmit(): void {
+    const carToAdd: Car = {
+      ...this.newCar
+    };
+  
+    this.carService.addCar(carToAdd).subscribe({
+      next: (data) => {
+        this.cars.push(data);
+        this.newCar = { id: 0, model: '', brand: '', year: 0, rented: 0, idPrice: 0 };
       },
       error: (error) => {
-        console.error('Error al obtener los autos con precios', error);
+        console.error('Error al agregar automovil:', error);
+        if (error.error && error.error.errors) {
+          console.error('Detalles de los errores de validación:', error.error.errors);
+        }
       }
-    }); 
-  }
+   });
+  }  
 
-  getAllCars(){
-     // Obtener los coches del servicio
-    this.carService.getAllCars().subscribe({
-      next: (data: Car[]) => {
-        this.cars = data; // Almacenar los coches obtenidos en la propiedad cars
-      },
-      error: (error) => {
-        console.error('Error al obtener los coches', error);
-      }
-  });   
-  }
+ 
 }

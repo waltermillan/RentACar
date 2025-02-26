@@ -48,13 +48,13 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     {
         get
         {
-            //if (_rents == null)
-            //{
-            //    _rents = new RentRepository(_context);
-            //}
-            //return _rents;
-            _rents ??= new RentRepository(_context);
+            if (_rents == null)
+            {
+                _rents = new RentRepository(_context);
+            }
             return _rents;
+            //_rents ??= new RentRepository(_context);
+            //return _rents;
         }
     }
 

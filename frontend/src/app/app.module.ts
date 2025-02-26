@@ -11,7 +11,10 @@ import { DocumentComponent } from './document/document.component';
 import { PriceComponent } from './price/price.component';
 
 import { CarComponent } from './car/car.component';
-import { PaytypeComponent } from './paytype/paytype.component';  // Si aún no lo has importado
+import { PaytypeComponent } from './paytype/paytype.component';
+import { InfoRentComponent } from './info-rent/info-rent.component';
+import { InfoCustomerComponent } from './info-customer/info-customer.component';
+import { InfoCarsComponent } from './info-cars/info-cars.component';  // Si aún no lo has importado
 
 
 @NgModule({
@@ -22,7 +25,10 @@ import { PaytypeComponent } from './paytype/paytype.component';  // Si aún no l
     DocumentComponent,
     PriceComponent,
     CarComponent,
-    PaytypeComponent
+    PaytypeComponent,
+    InfoRentComponent,
+    InfoCustomerComponent,
+    InfoCarsComponent
   ],
   imports: [
     BrowserModule,

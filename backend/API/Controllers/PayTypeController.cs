@@ -7,7 +7,8 @@ using Serilog;
 using System;
 
 namespace API.Controllers;
-
+[ApiController]
+[Route("api/paytypes")] // Usamos el plural en la ruta para seguir la convención RESTful
 public class PayTypeController : BaseApiController
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -19,8 +20,7 @@ public class PayTypeController : BaseApiController
         _mapper = mapper;
     }
 
-    // Método existente: obtener todas las ciudades
-    [HttpGet("GetAll")]
+    [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<PayType>>> Get()
@@ -29,8 +29,7 @@ public class PayTypeController : BaseApiController
         return _mapper.Map<List<PayType>>(payType);
     }
 
-    // Método existente: obtener una ciudad por su ID
-    [HttpGet("Get")]
+    [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -43,8 +42,7 @@ public class PayTypeController : BaseApiController
         return _mapper.Map<PayType>(payType);
     }
 
-    // Método existente: agregar una ciudad
-    [HttpPost("Add")]
+    [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<PayType>> Post(PayType oPayType)
@@ -74,8 +72,7 @@ public class PayTypeController : BaseApiController
         }
     }
 
-    // Método existente: actualizar una ciudad
-    [HttpPut("Update")]
+    [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -104,8 +101,7 @@ public class PayTypeController : BaseApiController
         }
     }
 
-    // Método existente: eliminar una ciudad
-    [HttpDelete("Delete/{id}")]
+    [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)

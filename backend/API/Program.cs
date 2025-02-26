@@ -7,6 +7,10 @@ using Serilog;
 using Infrastructure.Logging;
 using Serilog.Filters;
 using API.Profiles;
+using Microsoft.Extensions.DependencyInjection;
+using Core.Interfases;
+using Core.Services;
+using Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +33,13 @@ builder.Logging.AddSerilog(); // Agregar Serilog como proveedor de logs
 
 builder.Services.AddAutoMapper(Assembly.GetEntryAssembly());
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));  // Asegúrate de registrar el perfil
+
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<ICarRepository, CarRepository>();
+builder.Services.AddScoped<IRentRepository, RentRepository>();
+builder.Services.AddScoped<IPayTypeRepository, PayTypeRepository>();
+builder.Services.AddScoped<IPriceRepository, PriceRepository>();
+builder.Services.AddScoped<CustomerDTOService>();
 
 
 // Add services to the container.

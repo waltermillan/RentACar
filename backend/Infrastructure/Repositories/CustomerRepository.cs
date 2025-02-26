@@ -2,11 +2,18 @@
 using Core.Interfases;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace Infrastructure.Repositories;
 
 public class CustomerRepository(Context context) : GenericRepository<Customer>(context), ICustomerRepository
 {
+
+    public async Task<Customer> GetByCustomerIdAsync(int customerId)
+    {
+        return await _context.Customers
+                             .FirstOrDefaultAsync(a => a.Id == customerId);
+    }
 
     // Método existente
     public override async Task<Customer> GetByIdAsync(int id)
