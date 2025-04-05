@@ -41,4 +41,4 @@ DB
 
 1. Clone the repository:
 
-git clone [https://github.com/waltermillan/RwntACar.git](https://github.com/waltermillan/RentACar.git )
+git clone [https://github.com/waltermillan/RentACar.git](https://github.com/waltermillan/RentACar.git )
