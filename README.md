@@ -1,5 +1,6 @@
 # Rent A Car Project
-Car rental application. Classic ABM.
+Car rental application. Classic ABM. This system allows you to manage vehicle rentals efficiently, securely, and quickly. With our platform, you can check all active rentals, add new cars to our fleet, and register new customers easily.
+
 
 14/02/2025 =>
 
@@ -40,4 +41,4 @@ DB
 
 1. Clone the repository:
 
-git clone [https://github.com/waltermillan/sellers.git](https://github.com/waltermillan/RentACar.git )
+git clone [https://github.com/waltermillan/RwntACar.git](https://github.com/waltermillan/RentACar.git )
