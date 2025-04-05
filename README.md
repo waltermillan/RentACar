@@ -18,6 +18,10 @@ The main frontend modules in Angular 18.0.2 were added.
 - we use local storage to store the logged-in user's data, so that the session is not lost when the screen is refreshed.
 - Added Users and Roles entities to segregate functionality (to be done later).
 
+05/04/2025 => 
+
+- Add Entity-Relationship diagram.
+
 ## Objective:
 
 Practice .NET (C#) / SQL and Angular (Typescript) / With the use of design patterns / Onion Architecture.
