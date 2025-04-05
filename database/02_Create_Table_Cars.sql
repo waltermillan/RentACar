@@ -1,0 +1,9 @@
+CREATE TABLE "Cars" (
+	"id"	INTEGER NOT NULL,
+	"model"	TEXT,
+	"brand"	TEXT,
+	"year"	INTEGER NOT NULL,
+	"rented"	INTEGER NOT NULL,
+	"id_price"	INTEGER NOT NULL,
+	CONSTRAINT "PK_Car" PRIMARY KEY("id" AUTOINCREMENT)
+)

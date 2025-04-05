@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Entities
+namespace Core.Entities;
+
+[Table("PayTypes")]
+public class PayType : BaseEntity
 {
-    [Table("PayType")]
-    public class PayType : BaseEntity
-    {
-        [Column("name")]
-        public string Name { get; set; }
-    }
+    [Column("name")]
+    public string Name { get; set; }
+    [Column("details")]
+    public string Details { get; set; }
 }

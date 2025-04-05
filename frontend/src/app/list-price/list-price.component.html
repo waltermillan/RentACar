@@ -1,0 +1,21 @@
+<div class="div-show-data">
+  <table id="tblCars" class="table-bordered table-striped">
+    <thead class="thead-blue">
+      <tr>
+        <th>ID</th>
+        <th>Value</th>
+        <th>Descuent</th>
+        <th>Accept Discount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let price of prices">
+        <td>{{ price.id }}</td>
+        <td>{{ price.value }} €</td>
+        <td>{{ price.discount }} €</td>
+        <td #aceptaSi *ngIf="price.acceptDiscount" else #aceptaNo>YES</td>
+        <td #aceptaNo *ngIf="!price.acceptDiscount" else #aceptaSi>NO</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>

@@ -1,8 +1,7 @@
-﻿namespace Core.Interfases
+﻿namespace Core.Interfases;
+
+public interface ILoggingService
 {
-    public interface ILoggingService
-    {
-        void LogInformation(string message);
-        void LogError(string message, Exception exception);
-    }
+    void LogInformation(string message);
+    void LogError(string message, Exception exception);
 }

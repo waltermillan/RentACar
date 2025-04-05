@@ -1,0 +1,56 @@
+<div class="div-show-data">
+  <table id="tblCars" class="table-bordered table-striped">
+    <thead class="thead-blue">
+      <tr>
+        <th style="text-align: center">ID</th>
+        <th style="text-align: center">Brand</th>
+        <th style="text-align: center">Model</th>
+        <th style="text-align: center">Year</th>
+        <th style="text-align: center">Rented</th>
+        <th style="text-align: center">Rental price</th>
+        <th style="text-align: center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cp of carprice">
+        <td>{{ cp.car.id }}</td>
+        <td>{{ cp.car.brand }}</td>
+        <td>{{ cp.car.model }}</td>
+        <td>{{ cp.car.year }}</td>
+        <td *ngIf="cp.car.rented == 1">SI</td>
+        <td *ngIf="cp.car.rented == 0">NO</td>
+        <td>{{ cp.price.value }} €</td>
+        <td>
+          <table style="width: 100%;">
+            <tr>
+              <td style="width: 50%;text-align: center">
+                <button 
+                  (click)="deleteCar(cp.car.id)" 
+                  class="image-button">
+                  <img 
+                    src="assets/images/delete.png" 
+                    alt="Delete car" 
+                    title="Delete car"
+                    class="image-button img-button"/>
+                </button>
+                
+              </td>
+              <td style="width: 50%;text-align: center">
+                <button 
+                  (click)="updeteCar(cp.car.id)" 
+                  class="image-button">
+                  <img 
+                    src="assets/images/update.png" 
+                    alt="Update car" 
+                    title="Update car"
+                    class="image-button img-button"/>
+                </button>
+                
+              </td>
+            </tr>
+          </table>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

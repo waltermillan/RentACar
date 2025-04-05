@@ -1,0 +1,17 @@
+.thead-blue {
+    position: sticky;
+    top: 0;
+    background-color: #007BFF;
+    color: white; 
+    z-index: 10;
+  }
+  
+  .thead-blue th {
+    padding: 10px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  

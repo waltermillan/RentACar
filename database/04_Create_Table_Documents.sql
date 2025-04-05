@@ -1,0 +1,5 @@
+CREATE TABLE "Documents" (
+	"id"	INTEGER NOT NULL,
+	"description"	TEXT,
+	CONSTRAINT "PK_Document" PRIMARY KEY("id" AUTOINCREMENT)
+)

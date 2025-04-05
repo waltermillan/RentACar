@@ -1,40 +1,53 @@
-<div>
-  <!-- Rótulo con imagen en la parte superior -->
-  <header style="background-color: #d6e9e9; color: black; padding: 10px; text-align: center;">
-    <img src="assets/images/car-rental-icon.png" alt="Logo" style="max-width: 80px; vertical-align: middle; margin-right: 10px;">
-    <span style="font-size: 20px; vertical-align: middle;">Gestión de alquileres de automóviles</span>
+<div *ngIf="!authService.isLoggedIn()">
+  <app-login></app-login>
+</div>
+
+<div *ngIf="authService.isLoggedIn()">
+  <!-- Content from principal app -->
+  <header class="app-header" style="padding: 10px; text-align: center;">
+    <table style="width: 100%;">
+      <thead>
+        <tr>
+          <th>User: {{userName}}</th>
+          <th>
+            <img src="assets/images/car-rental-icon.png" alt="Logo" class="logo" (click)="navigateToHome()">
+            <span class="header-title">{{title}}</span>
+          </th>
+          <th>
+            <input type="button" class="btn btn-logout" value="Log out" (click)="logout()" />
+          </th>
+        </tr>
+      </thead>
+    </table>
   </header>
 
-  <!-- Contenedor principal con el menú lateral y contenido -->
-  <div style="display: flex; height: calc(100vh - 120px);">
-    <!-- Menú lateral -->
-    <div style="width: 200px; background-color: #f4f4f4; padding: 10px;">
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="side-menu">
       <ul>
-
-        <li><a routerLink="/clientes" routerLinkActive="active">alta-clientes</a></li>
-        <li><a routerLink="/alquileres" routerLinkActive="active">alta-alquiler</a></li>
-        <li><a routerLink="/automoviles" routerLinkActive="active">alta-automóviles</a></li>
-
+        <li><a routerLink="/create-customers" routerLinkActive="active">New Customers</a></li>
+        <li><a routerLink="/create-rents" routerLinkActive="active">New Rents</a></li>
+        <li><a routerLink="/create-cars" routerLinkActive="active">New Cars</a></li>
       </ul>
-      <hr style="border: 1px solid #000; margin: 20px 0;">
+      <hr class="menu-divider">
       <ul>
-        <li><a routerLink="/info-alquiler" routerLinkActive="active">Info-alquiler</a></li>
-        <li><a routerLink="/info-clientes" routerLinkActive="active">Info-clientes</a></li>
-        <li><a routerLink="/info-automoviles" routerLinkActive="active">info-automóviles</a></li>
-        <li><a routerLink="/documentos" routerLinkActive="active">info-Documentos</a></li>
-        <li><a routerLink="/precios" routerLinkActive="active">info-precios</a></li>
-        <li><a routerLink="/TipoPago" routerLinkActive="active">info-tipos De Pagos</a></li>        
+        <li><a routerLink="/list-rents" routerLinkActive="active">Rents</a></li>
+        <li><a routerLink="/list-customers" routerLinkActive="active">Customers</a></li>
+        <li><a routerLink="/list-cars" routerLinkActive="active">Cars</a></li>
+        <li><a routerLink="/list-documents" routerLinkActive="active">Documents</a></li>
+        <li><a routerLink="/list-prices" routerLinkActive="active">Prices</a></li>
+        <li><a routerLink="/list-paytype" routerLinkActive="active">Pays</a></li>
+        <li><a routerLink="/list-users" routerLinkActive="active">Users</a></li>
       </ul>
     </div>
 
-    <!-- Contenido principal -->
-    <div style="flex-grow: 1; padding: 20px; overflow-y: auto;">
-      <router-outlet></router-outlet>  <!-- Aquí se cargarán los componentes -->
+    <div class="content-area">
+      <router-outlet></router-outlet>
     </div>
   </div>
 
   <!-- Footer -->
-  <footer style="background-color: #d6e9e9; color: black; padding: 10px; text-align: center; position: fixed; width: 100%; bottom: 0;">
-    <p>&copy; 2025 Gestión de Alquileres de Automóviles. Todos los derechos reservados.</p>
+  <footer class="app-footer">
+    <p>{{footerDetails}}</p>
   </footer>
 </div>

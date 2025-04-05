@@ -12,18 +12,18 @@ export class CustomerService {
 
   constructor(private http: HttpClient) { }
 
-  getAllCustomers(): Observable<Customer[]> {
+  getAll(): Observable<Customer[]> {
     return this.http.get<Customer[]>(this.apiUrl);
   }
 
-  addCustomer(customer: Customer): Observable<Customer> {
+  add(customer: Customer): Observable<Customer> {
     return this.http.post<Customer>(this.apiUrl, customer);
   }
 
 
-  deleteCustomer(id: number): Observable<any> {
-    const url = `${this.apiUrl}{id}`;  // Construir la URL con el 'id' aquí
-    return this.http.delete<any>(url);  // Llamar al servicio HTTP con la URL correcta
+  delete(id: number): Observable<any> {
+    const url = `${this.apiUrl}${id}`;  
+    return this.http.delete<any>(url); 
   }
   
    

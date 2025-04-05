@@ -1,0 +1,18 @@
+<div class="div-show-data">
+  <table id="tblCars" class="table-bordered table-striped">
+    <thead class="thead-blue">
+      <tr>
+        <th>ID</th>
+        <th>Tipe of Pay</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let payType of paystype">
+        <td>{{ payType.id }}</td>
+        <td>{{ payType.name }}</td>
+        <td>{{ payType.details }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

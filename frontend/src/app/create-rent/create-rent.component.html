@@ -1,0 +1,39 @@
+<div class="container">
+  <p style="font-weight: bold">Add New Rent</p>
+  
+    <div class="form-group">
+      <label for="clientes">Select Customer:</label>
+      <select [(ngModel)]="selectedCliente" id="clientes" class="form-control">
+        <option *ngFor="let customer of customers" [value]="customer.id">{{ customer.name }}</option>
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="cars">Select Car:</label>
+      <select [(ngModel)]="selectedCar" (change)="onCarChange()" id="cars" class="form-control">
+        <option *ngFor="let cp of carsPrice" [value]="cp.car.id">{{cp.car.brand}} {{ cp.car.model }}</option>
+
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="tiposPago">Select Type of Pay:</label>
+      <select [(ngModel)]="selectedPago" id="tiposPago" class="form-control">
+        <option *ngFor="let payType of paysType" [value]="payType.id">{{ payType.name }}</option>
+      </select>
+    </div>
+
+    <div class="contador">
+      <p style="font-weight: bold">Rental days counter</p>
+      <p>{{ rentDays }} días</p>
+      <img src="assets/images/add-icon.svg" class="img-rental" (click)="addDay()" title="add day">
+      <!-- <button>Add a day</button> -->
+      <img src="assets/images/sub-icon.svg" class="img-rental" (click)="subDay()" title="sub day">
+
+    </div>
+  
+    <div class="form-group">
+      <button (click)="rentCar()" class="btn btn-primary btn-block mt-2">Rent</button>
+    </div>
+  </div>
+  

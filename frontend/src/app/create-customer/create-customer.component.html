@@ -1,0 +1,30 @@
+<div class="container mt-3">
+  <p style="font-weight: bold">Add New Customer</p>
+  <form (ngSubmit)="onSubmit()" #customerForm="ngForm">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" class="form-control" [(ngModel)]="newCustomer.name" name="name" required>
+    </div>
+    <div class="form-group">
+      <label for="document">Document:</label>
+      <input type="text" id="document" class="form-control" [(ngModel)]="newCustomer.document" name="document" required>
+    </div>
+    <div class="form-group">
+      <label for="documentType">Document Type:</label>
+     <div class="form-group">
+      <select id="documentType" [(ngModel)]="newCustomer.documentType" name="documentType" class="form-control" required>
+        <option value="1">DNI</option>
+        <option value="2">NIE</option>
+        <option value="3">TIE</option>
+        <option value="4">DNIe</option>
+        <option value="5">DNI 3.0</option>
+      </select>
+    </div>
+    </div>
+    <div class="form-group">
+      <label for="birthDate">Date of Birth:</label>
+      <input type="date" [(ngModel)]="newCustomer.birthDate" name="birthDate" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!customerForm.valid">Add Customer</button>
+  </form>
+</div>

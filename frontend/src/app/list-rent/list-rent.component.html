@@ -1,0 +1,45 @@
+  <div class="div-show-data">
+    <table id="tblCars" class="table-bordered table-striped">
+      <thead class="thead-blue">
+        <tr>
+          <th>ID</th>
+          <th>Customer</th>
+          <th>Car</th>
+          <th>Day</th>
+          <th>Remaining Day</th>
+          <th>Pay Type</th>
+          <th>Price [€]</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rent of rents">
+          <td>{{ rent.id }}</td>
+          <td style="text-align: left;">{{ rent.name }}</td>
+          <td style="text-align: left;">{{ rent.model  }} ( {{rent.brand}} )</td>
+          <td style="text-align: center;">{{ rent.day  | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ rent.dayRemaining | date: 'dd/MM/yyyy'}}</td>
+          <td>{{ rent.payTypeName }} </td>
+          <td>{{ rent.price }}</td>
+          <td>
+            <table style="width: 100%;">
+              <tr>
+                <td style="width: 100%;text-align: center">
+                  <button 
+                    (click)="deleteRent(rent.id, rent.idCar)" 
+                    class="image-button">
+                    <img 
+                      src="assets/images/delete.png" 
+                      alt="Delete rent" 
+                      title="Delete rent"
+                      class="image-button img-button"/>
+                  </button>
+                  
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

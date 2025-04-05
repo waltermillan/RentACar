@@ -1,0 +1,5 @@
+CREATE TABLE "Roles" (
+	"id"	INTEGER NOT NULL,
+	"description"	INTEGER,
+	PRIMARY KEY("id" AUTOINCREMENT)
+)

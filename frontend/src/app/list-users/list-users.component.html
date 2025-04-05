@@ -1,0 +1,45 @@
+<div class="div-show-data">
+    <table id="tblUsers" class="table-bordered table-striped">
+      <thead class="thead-blue">
+        <tr>
+          <th style="text-align: center;">ID</th>
+          <th style="text-align: center;">Name</th>
+          <th style="text-align: center;">Rol</th>
+          <th style="text-align: center;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.userName }}</td>
+          <td>{{ user.rol }}</td>
+          <td style="width: 50%;text-align: center" *ngIf="isAdmin(user.idRol); else NoAdmin">
+            <button
+              (click)="deleteUser(user.id)" 
+              class="image-button">
+              <img 
+                src="assets/images/delete.png" 
+                alt="Delete user" 
+                title="Delete user"
+                class="image-button img-button"/>
+            </button>
+          </td>
+
+          <ng-template #NoAdmin >
+            <td style="width: 50%;text-align: center">
+                <button
+                    class="image-button">
+                    <img 
+                    src="assets/images/delete-disabled.png" 
+                    alt="Can't delete user" 
+                    title="Can't delete user"
+                    class="image-button img-button" (click)="getMessage()"/>
+                </button>
+            </td>
+          </ng-template>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  

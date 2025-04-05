@@ -1,49 +1,50 @@
 using API.Extensions;
-using Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-using Microsoft.Extensions.Logging;
-using Serilog;
-using Infrastructure.Logging;
-using Serilog.Filters;
 using API.Profiles;
-using Microsoft.Extensions.DependencyInjection;
+using API.Services;
 using Core.Interfases;
-using Core.Services;
+using Infrastructure.Data;
 using Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Serilog.Filters;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Limpiar otros proveedores de logging
+string appName = builder.Configuration["SystemName:Name"] ?? "App";
+
+// Clear other logging providers
 builder.Logging.ClearProviders();
 
-// Configurar filtros de logging para ASP.NET Core y Entity Framework Core
-builder.Logging.AddFilter("Microsoft", LogLevel.Warning); // Para toda la parte de Microsoft
-builder.Logging.AddFilter("System", LogLevel.Warning); // Para logs de System
+// Configure logging filters for ASP.NET Core and Entity Framework Core
+builder.Logging.AddFilter("Microsoft", LogLevel.Warning);
+builder.Logging.AddFilter("System", LogLevel.Warning);
 
-// Configuración de Serilog para escribir solo en archivo
+// Configuring Serilog to write to file only
 Log.Logger = new LoggerConfiguration()
-    .WriteTo.File("logs/todolist-.log", rollingInterval: RollingInterval.Day) // Log en archivo diario
-    .Filter.ByExcluding(Matching.FromSource("Microsoft.EntityFrameworkCore")) // Excluir logs de Entity Framework Core
-    .Filter.ByExcluding(Matching.FromSource("Microsoft.AspNetCore")) // Excluir logs de ASP.NET Core
+    .WriteTo.File($"logs/{appName}-.log", rollingInterval: RollingInterval.Day) // Log in daily archive
+    .Filter.ByExcluding(Matching.FromSource("Microsoft.EntityFrameworkCore")) // Exclude logs from Entity Framework Core
+    .Filter.ByExcluding(Matching.FromSource("Microsoft.AspNetCore")) // Exclude logs from ASP.NET Core
     .CreateLogger();
 
-builder.Logging.AddSerilog(); // Agregar Serilog como proveedor de logs
+builder.Logging.AddSerilog(); // Add Serilog as a log provider
 
 
 builder.Services.AddAutoMapper(Assembly.GetEntryAssembly());
-builder.Services.AddAutoMapper(typeof(AutoMapperProfile));  // Asegúrate de registrar el perfil
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<IRentRepository, RentRepository>();
 builder.Services.AddScoped<IPayTypeRepository, PayTypeRepository>();
 builder.Services.AddScoped<IPriceRepository, PriceRepository>();
-builder.Services.AddScoped<CustomerDTOService>();
-
+builder.Services.AddScoped<IRolRepository, RolRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<UserDTOService>();
+builder.Services.AddScoped<RentDTOService>();
 
 // Add services to the container.
-builder.Services.ConfigureCors();
+builder.Services.ConfigureCors(builder.Configuration);
 builder.Services.AddAplicacionServices();
 builder.Services.AddControllers();
 
@@ -52,7 +53,6 @@ builder.Services.AddDbContext<Context>(options =>
     string connectionString = builder.Configuration.GetConnectionString("RentACarConnection");
     options.UseSqlite(connectionString);
 });
-
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -1,6 +1,7 @@
 ﻿using Core.Interfases;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
+
 namespace Infrastructure.UnitOfWork;
 
 public class UnitOfWork : IUnitOfWork, IDisposable
@@ -12,6 +13,8 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     private IRentRepository _rents;
     private IPriceRepository _prices;
     private IDocumentRepository _documents;
+    private IUserRepository _users;
+    private IRolRepository _roles;
 
     public UnitOfWork(Context context)
     {
@@ -22,7 +25,8 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     {
         get
         {
-            _cars ??= new CarRepository(_context);
+            if(_cars is null)
+                _cars = new CarRepository(_context);
             return _cars;
         }
     }
@@ -31,7 +35,8 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     {
         get
         {
-            _customers ??= new CustomerRepository(_context);
+            if(_customers is null)
+                _customers = new CustomerRepository(_context);
             return _customers;
         }
     }
@@ -40,7 +45,8 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     {
         get
         {
-            _paysType ??= new PayTypeRepository(_context);
+            if (_paysType is null)
+                _paysType = new PayTypeRepository(_context);
             return _paysType;
         }
     }
@@ -48,13 +54,11 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     {
         get
         {
-            if (_rents == null)
-            {
+            if (_rents is null)
                 _rents = new RentRepository(_context);
-            }
+
             return _rents;
-            //_rents ??= new RentRepository(_context);
-            //return _rents;
+
         }
     }
 
@@ -62,11 +66,9 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     {
         get
         {
-            //if (_prices == null)
-            //{
-            //    _prices = new PriceRepository(_context);
-            //}
-            _prices ??= new PriceRepository(_context);
+            if (_prices is null)
+                _prices = new PriceRepository(_context);
+
             return _prices;
         }
     }
@@ -75,14 +77,33 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     {
         get
         {
-            //if (_documents == null)
-            //{
-            //    _documents = new DocumentRepository(_context);
-            //}
-            _documents ??= new DocumentRepository(_context);
+            if (_documents is null)
+                _documents = new DocumentRepository(_context);
+
             return _documents;
         }
     }
+    public IUserRepository Users
+    {
+        get
+        {
+            if (_users is null)
+                _users = new UserRepository(_context);
+
+            return _users;
+        }
+    }
+
+    public IRolRepository Roles
+    {
+        get
+        {
+            if (_roles is null)
+                _roles = new RolRepository(_context);
+            return _roles;
+        }
+    }
+
 
     public async Task<int> SaveAsync()
     {

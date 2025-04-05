@@ -1,0 +1,53 @@
+<div class="div-show-data">
+  <table id="tblCars" class="table-bordered table-striped">
+    <thead class="thead-blue">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Document</th>
+      <th>Document Type</th>
+      <th>Birth</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let customer of customers">
+      <td>{{ customer.id }}</td>
+      <td style="text-align: left;">{{ customer.name }}</td>
+      <td style="text-align: left;">{{ customer.document }}</td>
+      <td>{{ getDocumentTypeName(customer.documentType) }}</td>
+      <td>{{ customer.birthDate | date:'dd/MM/yyyy' }}</td>
+      <td>
+        <table style="width: 100%;">
+          <tr>
+            <td style="width: 50%;text-align: center">
+              <button 
+                (click)="deleteCustomer(customer.id)" 
+                class="image-button">
+                <img 
+                  src="assets/images/delete.png" 
+                  alt="Delete customer" 
+                  title="Delete customer"
+                  class="image-button img-button"/>
+              </button>
+              
+            </td>
+            <td style="width: 50%;text-align: center;">
+              <button 
+                (click)="updeteCar(customer.id)" 
+                class="image-button">
+                <img 
+                  src="assets/images/update.png" 
+                  alt="Update customer" 
+                  title="Update customer"
+                  class="image-button img-button"/>
+              </button>
+              
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>

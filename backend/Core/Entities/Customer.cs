@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Entities
+namespace Core.Entities;
+
+[Table("Customers")]
+public class Customer : BaseEntity
 {
-    [Table("Customer")]
-    public class Customer : BaseEntity
-    {
-        [Column("name")]
-        public string Name { get; set; }
-        [Column("document")]
-        public string Document { get; set; }
-        [Column("document_type")]
-        public int DocumentType { get; set; }
-        [Column("birth_date")]
-        public DateTime BirthDate { get; set; }
-    }
+    [Column("name")]
+    public string Name { get; set; }
+    [Column("document")]
+    public string Document { get; set; }
+    [Column("document_type")]
+    public int DocumentType { get; set; }
+    [Column("birth_date")]
+    public DateTime BirthDate { get; set; }
 }

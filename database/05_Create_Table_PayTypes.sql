@@ -1,0 +1,6 @@
+CREATE TABLE "PayTypes" (
+	"id"	INTEGER NOT NULL,
+	"name"	TEXT,
+	"details"	TEXT,
+	CONSTRAINT "PK_PayType" PRIMARY KEY("id" AUTOINCREMENT)
+)

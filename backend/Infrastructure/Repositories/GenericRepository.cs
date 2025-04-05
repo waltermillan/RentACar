@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
-using Core.Entities;
-using Infrastructure.Data;
+﻿using Core.Entities;
 using Core.Interfases;
+using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+
 namespace Infrastructure.Repositories;
 
 public class GenericRepository<T>(Context context) : IGenericRepository<T> where T : BaseEntity
@@ -29,24 +30,15 @@ public class GenericRepository<T>(Context context) : IGenericRepository<T> where
         return await _context.Set<T>().ToListAsync();
     }
 
-    public virtual async Task<(int totalRegistros, IEnumerable<T> registros)> GetAllAsync(
-    int pageIndex, int pageSize, string search)
-    {
-        var totalRegistros = await _context.Set<T>()
-                            .CountAsync();
-
-        var registros = await _context.Set<T>()
-                                .Skip((pageIndex - 1) * pageSize)
-                                .Take(pageSize)
-                                .ToListAsync();
-
-        return (totalRegistros, registros);
-
-    }
-
     public virtual async Task<T> GetByIdAsync(int id)
     {
         return await _context.Set<T>().FindAsync(id);
+    }
+
+    public async Task<User> GetByUsrAsync(string usr)
+    {
+        return await _context.Users
+                             .FirstOrDefaultAsync(u => u.Name == usr);
     }
 
     public virtual void Remove(T entity)

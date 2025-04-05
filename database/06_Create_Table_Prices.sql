@@ -1,0 +1,7 @@
+CREATE TABLE "Prices" (
+	"id"	INTEGER NOT NULL,
+	"value"	TEXT NOT NULL,
+	"discount"	TEXT NOT NULL,
+	"acceptDiscount"	INTEGER NOT NULL,
+	CONSTRAINT "PK_Price" PRIMARY KEY("id" AUTOINCREMENT)
+)

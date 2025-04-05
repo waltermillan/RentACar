@@ -1,0 +1,19 @@
+/* Hacer el encabezado sticky con fondo azul y texto blanco */
+.thead-blue {
+    position: sticky;
+    top: 0;
+    background-color: #007BFF;  /* Azul */
+    color: white;               /* Texto blanco */
+    z-index: 10;                /* Asegurar que esté sobre el contenido */
+  }
+  
+  /* Agregar sombra al encabezado */
+  .thead-blue th {
+    padding: 10px;
+  }
+  
+  /* Asegurar que la tabla tenga un buen estilo */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }

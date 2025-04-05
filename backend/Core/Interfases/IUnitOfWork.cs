@@ -10,6 +10,8 @@ public interface IUnitOfWork
     IPriceRepository Prices { get; }
     IRentRepository Rents { get; }
     IDocumentRepository Documents { get; }
+    IUserRepository Users { get; }
+    IRolRepository Roles { get; }
 
     void Dispose();
     Task<int> SaveAsync();

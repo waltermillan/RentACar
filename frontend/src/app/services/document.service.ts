@@ -13,7 +13,7 @@ export class DocumentService {
     private apiUrl = 'http://localhost:5184/api/documents/';
   
   
-    getAllDocuments(): Observable<Document[]> {
+    getAll(): Observable<Document[]> {
       return this.http.get<Document[]>(this.apiUrl);
     }
 }

@@ -13,22 +13,24 @@ export class CarService {
 
   constructor(private http: HttpClient) { }
 
-  getAllCars(): Observable<Car[]> {
-    console.log(this.apiUrl);
+  getAll(): Observable<Car[]> {
     return this.http.get<Car[]>(this.apiUrl);
   }
 
-  CarUpdateRented(id: number, rentedStatus: number): Observable<Car> {
+  updateRented(id: number, rentedStatus: number): Observable<Car> {
     const url = `${this.apiUrl}${id}/rented`;
     const body = { rented: rentedStatus }; 
-  
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
   
     return this.http.patch<Car>(url, body, { headers });
   }
 
-
-  addCar(car: Car): Observable<Car> {
+  add(car: Car): Observable<Car> {
       return this.http.post<Car>(this.apiUrl, car);
-    }
+  }
+
+  delete(id: number): Observable<any> {
+    const url = `${this.apiUrl}${id}`; 
+    return this.http.delete<any>(url); 
+  }
 }

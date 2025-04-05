@@ -1,0 +1,16 @@
+<div class="div-show-data">
+    <table id="tblCars" class="table-bordered table-striped">
+      <thead class="thead-blue">
+      <tr>
+        <th>ID</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let document of documents">
+        <td>{{ document.id }}</td>
+        <td>{{ document.description }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
