@@ -1,48 +1,109 @@
-# Rent A Car Project
-Car rental application. Classic ABM. This system allows you to manage vehicle rentals efficiently, securely, and quickly. With our platform, you can check all active rentals, add new cars to our fleet, and register new customers easily.
+# 🚗 Rent A Car Project
 
+Car rental application — a classic CRUD system. This platform enables efficient, secure, and fast vehicle rental management. You can monitor all active rentals, add new vehicles to the fleet, and register customers with ease.
 
-14/02/2025 =>
+---
 
-- The application was generated, the database and the main tables were created: Cars, Users, Rentals, Prices, Payment types, etc.
-The backend was added in its model with ONION architecture and the design patterns: BaseEntity, UnitOfWork and Repository.
-The main frontend modules in Angular 18.0.2 were added.
+## 📅 Changelog
 
-26/02/2025 =>
+- **14/02/2025**: Initial release — Backend, Frontend, and Database.
+- **26/02/2025**: 
+  - **Backend**: API refactored to follow RESTful conventions, ensuring route correctness and pluralization.  
+  - **Frontend**: URL invocation fixes.
+- **05/04/2025**: 
+  - **Backend**: Added `User` entity and login module. Also added `Users` and `Roles` tables, including full DDL scripts for all entities.
+  - **Frontend**: Implemented localStorage to persist user session data. Improved UI styling and cleaned up code. Added component testing using `ng test` (Karma/Jasmine) — several fixes were made thanks to this.
+  - Used **Angular Material** for message popups.  
+  - Added Entity-Relationship Diagram (ERD).
 
-- API fixes to follow RESTful conventions and ensure that routes are proper and plural. Front end: Correction of URL invocations.
+---
 
-05/04/2025 => 
+## 🎯 Objective
 
-- the system grew and the login module was added.
-- we use local storage to store the logged-in user's data, so that the session is not lost when the screen is refreshed.
-- Added Users and Roles entities to segregate functionality (to be done later).
+To practice building a full-stack application using .NET (C#), SQL, and Angular (TypeScript), incorporating design patterns and Onion Architecture. The system connects to a SQLite database via Entity Framework and uses Docker and DBeaver for environment setup and management.
 
-05/04/2025 => 
+### Technologies:
 
-- Add Entity-Relationship diagram.
+- **.NET (C#)** and **SQL Server**
+- **Angular (TypeScript)**
+- **Design Patterns**
+- **Onion Architecture**
 
-## Objective:
+---
 
-Practice .NET (C#) / SQL and Angular (Typescript) / With the use of design patterns / Onion Architecture.
-Connecting to SQL Lite, via EF, and using docker and DBeaver.
+## 🚀 Features
 
-## Features.
+### 🔧 Backend
 
-BACKEND:
-- Onion Architecture.
-- Design Patterns: BaseEntity, UnitOfWork, Repository, Data Transfer Object (DTO).
+- Structured around **Onion Architecture**
+- Implements several **Design Patterns**:
+  - `BaseEntity`
+  - `UnitOfWork`
+  - `Repository`
+  - `DTO` (Data Transfer Object)
+- **Key Libraries**:
+  - **Encryption**:
+    - `System.Security.Cryptography` (AES-256)
+  - **Logging**:
+    - `Serilog`
+    - `Serilog.Extensions.Logging`
+    - `Serilog.Sinks.File`
+  - **ORM**:
+    - `Microsoft.EntityFrameworkCore.SqlServer`
+    - `Microsoft.EntityFrameworkCore.Tools`
 
-FRONTEND:
-- Developed with Angular 18.0.2 / 18.2.12
-- Module oriented.
+---
 
-DB
-- Written in SQL Lite DB we use DB Browser From SQLite
-- Tables (DDLs) and Data (DMLs).
+### 💻 Frontend
 
-## Installation
+- Built with **Angular 18.2.14**
+- Features:
+  - Reactive Forms
+  - `AuthService` and HTTP Interceptors
+  - Custom Pipes and Shared Modules
+  - Angular Material for UI components and popups
+  - Unit testing with Karma and Jasmine (`ng test`)
+
+---
+
+### 🗄️ Database
+
+- Uses **MariaDB**, deployed via **Docker Desktop**
+- Includes:
+  - Entity-Relationship Diagram (ERD)
+  - Sample data insertion scripts (`.sql`)
+  - **DDL scripts** (for schema creation)
+  - **DML scripts** (for sample data insertion)
+
+---
+
+## 🧪 Installation
+
+### ✅ Prerequisites
+
+Make sure the following tools are installed on your machine:
+
+- [.NET SDK 9.0.200](https://dotnet.microsoft.com/)
+- [Docker Desktop 4.40.0+](https://www.docker.com/)
+- [Node.js + npm](https://nodejs.org/) (for the frontend)
+- [Postman 11.44.3](https://www.postman.com/downloads/)
+
+---
+
+### 🔧 Setup Steps
 
 1. Clone the repository:
+    ```bash
+    git clone https://github.com/waltermillan/RentACar.git
+    ```
 
-git clone [https://github.com/waltermillan/RentACar.git](https://github.com/waltermillan/RentACar.git )
+2. Follow the setup video guide (coming soon):
+    - [Version 1 - Display Version](#)
+
+3. Complete the remaining setup steps as described in the project documentation.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
